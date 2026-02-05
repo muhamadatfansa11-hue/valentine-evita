@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Untuk Evita Cantik</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(135deg,#120018,#2b0033,#4b003f);
+    overflow:hidden;
+    font-family:'Poppins',sans-serif;
+    color:#fff;
+}
+.screen{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+}
+h1{
+    font-family:'Playfair Display',serif;
+    font-size:2.4em;
+    color:#ff9ad5;
+}
+p{opacity:.9;font-size:1.1em}
+button{
+    margin-top:30px;
+    padding:16px 36px;
+    font-size:1.2em;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#ff4fa7,#ff7ecb);
+    color:#fff;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(255,80,170,.5);
+}
+.hidden{display:none}
+#ring{
+    font-size:90px;
+    animation:pop 1s ease forwards;
+}
+@keyframes pop{
+    0%{transform:scale(0);opacity:0}
+    70%{transform:scale(1.2)}
+    100%{transform:scale(1);opacity:1}
+}
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    top:-10px;
+    animation:fall linear forwards;
+}
+@keyframes fall{
+    to{transform:translateY(110vh) rotate(360deg)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="screen" id="start">
+    <h1>Hai Evita Cantik</h1>
+    <p>Ada satu hal penting dari<br><b>Fansa</b> untuk kamu…</p>
+    <button onclick="start()">Mulai</button>
+</div>
+
+<div class="screen hidden" id="question">
+    <h1>Evita Cantik</h1>
+    <p>Maukah kamu terus bersama<br>Fansa, hari ini, besok, dan selamanya?</p>
+    <button onclick="yes()">Iya</button>
+</div>
+
+<div class="screen hidden" id="end">
+    <div id="ring">💍</div>
+    <h1>Kamu Milik Fansa</h1>
+    <p>Terima kasih sudah bilang iya,<br>Evita Cantik.</p>
+</div>
+
+<script>
+function start(){
+    document.getElementById('start').classList.add('hidden');
+    document.getElementById('question').classList.remove('hidden');
+    if(document.documentElement.requestFullscreen){
+        document.documentElement.requestFullscreen();
+    }
+}
+
+function yes(){
+    document.getElementById('question').classList.add('hidden');
+    document.getElementById('end').classList.remove('hidden');
+    for(let i=0;i<120;i++){
+        let c=document.createElement('div');
+        c.className='confetti';
+        c.style.left=Math.random()*100+'vw';
+        c.style.background=`hsl(${Math.random()*360},80%,70%)`;
+        c.style.animationDuration=2+Math.random()*3+'s';
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),5000);
+    }
+}
+</script>
+
+</body>
+</html>
